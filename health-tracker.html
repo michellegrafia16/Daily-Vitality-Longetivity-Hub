@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tracker - Daily Vitality</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D4A3E;
+            --secondary: #C8956C;
+            --accent: #8FAE7D;
+            --bg: #F5F1EA;
+            --card-bg: #FFFFFF;
+            --text: #1A1A1A;
+            --text-secondary: #6B6B6B;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --error: #E53935;
+            --border: #E8E2D9;
+            --shadow: 0 2px 12px rgba(45,74,62,0.06);
+            --shadow-hover: 0 8px 24px rgba(45,74,62,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .mono {
+            font-family: 'DM Mono', monospace;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: var(--primary);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .logo {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .nav-item.active {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .quick-stats {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .quick-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+        }
+
+        .quick-stat-value {
+            font-family: 'DM Mono', monospace;
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 240px;
+            padding: 32px;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .date-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .date-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .date-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .current-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .today-btn {
+            padding: 8px 16px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .today-btn:hover {
+            background: var(--secondary);
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Summary Cards */
+        .summary-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .summary-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        .summary-card:nth-child(1) { animation-delay: 0.1s; }
+        .summary-card:nth-child(2) { animation-delay: 0.2s; }
+        .summary-card:nth-child(3) { animation-delay: 0.3s; }
+        .summary-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .summary-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .summary-icon.water { background: #E3F2FD; }
+        .summary-icon.sleep { background: #F3E5F5; }
+        .summary-icon.steps { background: #E8F5E9; }
+        .summary-icon.mood { background: #FFF3E0; }
+
+        .summary-value {
+            font-family: 'DM Mono', monospace;
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .summary-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .summary-progress {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .summary-progress-bar {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.8s ease;
+        }
+
+        /* Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        .metric-card:nth-child(1) { animation-delay: 0.2s; }
+        .metric-card:nth-child(2) { animation-delay: 0.3s; }
+        .metric-card:nth-child(3) { animation-delay: 0.4s; }
+        .metric-card:nth-child(4) { animation-delay: 0.5s; }
+        .metric-card:nth-child(5) { animation-delay: 0.6s; }
+        .metric-card:nth-child(6) { animation-delay: 0.7s; }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .metric-card.goal-met {
+            position: relative;
+        }
+
+        .metric-card.goal-met::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: radial-gradient(circle at top right, rgba(143, 174, 125, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Water */
+        .water .card-icon { background: #E3F2FD; }
+        .water-display {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .water-glass {
+            width: 32px;
+            height: 40px;
+            border: 2px solid var(--border);
+            border-radius: 4px 4px 8px 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .water-glass::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2196F3;
+            transition: height 0.3s ease;
+        }
+
+        .water-glass.filled::after {
+            height: 100%;
+        }
+
+        .water-glass:hover {
+            border-color: #2196F3;
+            transform: scale(1.1);
+        }
+
+        .water-glass.filled:hover {
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .water-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .water-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            transition: all 0.2s;
+            color: var(--text);
+        }
+
+        .water-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .water-btn.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .water-btn.primary:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .water-goal {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+        }
+
+        /* Sleep */
+        .sleep .card-icon { background: #F3E5F5; }
+        .sleep-display {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .sleep-icon {
+            font-size: 40px;
+        }
+
+        .sleep-hours {
+            font-family: 'DM Mono', monospace;
+            font-size: 36px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .sleep-unit {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .sleep-quality {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .star {
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--border);
+            transition: all 0.2s;
+        }
+
+        .star.active {
+            color: var(--secondary);
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .sleep-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #8FAE7D 0%, #8FAE7D var(--progress), #E8E2D9 var(--progress), #E8E2D9 100%);
+        }
+
+        .sleep-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* Steps */
+        .steps .card-icon { background: #E8F5E9; }
+        .steps-display {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .steps-ring {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        .steps-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .steps-ring circle {
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .steps-ring .bg {
+            stroke: var(--border);
+        }
+
+        .steps-ring .progress {
+            stroke: var(--accent);
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .steps-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .steps-count {
+            font-family: 'DM Mono', monospace;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .steps-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .steps-input-wrap {
+            flex: 1;
+        }
+
+        .steps-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .steps-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .steps-goal-text {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* Mood */
+        .mood .card-icon { background: #FFF3E0; }
+        .mood-display {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .mood-emoji {
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            opacity: 0.6;
+            filter: grayscale(1);
+        }
+
+        .mood-emoji:hover {
+            transform: scale(1.3);
+            opacity: 1;
+            filter: grayscale(0);
+        }
+
+        .mood-emoji.active {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: scale(1.2);
+        }
+
+        .mood-label {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            min-height: 24px;
+        }
+
+        /* Weight */
+        .weight .card-icon { background: #ECEFF1; }
+        .weight-display {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .weight-input-wrap {
+            flex: 1;
+            position: relative;
+        }
+
+        .weight-input {
+            width: 100%;
+            padding: 12px 40px 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .weight-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .weight-unit {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .weight-unit:hover {
+            background: var(--bg);
+        }
+
+        .weight-sparkline {
+            height: 40px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            padding: 8px 0;
+        }
+
+        .spark-bar {
+            flex: 1;
+            background: var(--accent);
+            border-radius: 2px;
+            min-height: 4px;
+            transition: height 0.3s ease;
+        }
+
+        .weight-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Vitals */
+        .vitals .card-icon { background: #FFEBEE; }
+        .vitals-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .vital-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .vital-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .vital-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .vital-status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .status-badge.optimal { background: #E8F5E9; color: var(--success); }
+        .status-badge.elevated { background: #FFF3E0; color: var(--warning); }
+        .status-badge.high { background: #FFEBEE; color: var(--error); }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease;
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 2s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 1199px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main {
+                margin-left: 0;
+            }
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .summary-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                padding: 20px;
+                padding-bottom: 100px;
+            }
+            .header {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .summary-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            padding: 12px 20px;
+            z-index: 100;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .mobile-nav-item.active {
+            color: var(--primary);
+        }
+
+        .mobile-nav-icon {
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+            }
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            z-index: 101;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        @media (max-width: 1199px) {
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+        }
+
+        @media (max-width: 1199px) {
+            .sidebar-overlay.open {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">♥</div>
+            Daily Vitality
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active">📊 Dashboard</li>
+            <li class="nav-item">📈 Progress</li>
+            <li class="nav-item">🎯 Goals</li>
+            <li class="nav-item">📝 History</li>
+            <li class="nav-item">⚙️ Settings</li>
+        </ul>
+        <div class="quick-stats">
+            <div class="quick-stat">
+                <span>Streak</span>
+                <span class="quick-stat-value" id="streak">0 days</span>
+            </div>
+            <div class="quick-stat">
+                <span>Today's Score</span>
+                <span class="quick-stat-value" id="score">0%</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="header">
+            <div>
+                <h1 class="page-title">Health Dashboard</h1>
+                <p class="page-subtitle">Track your daily wellness journey</p>
+            </div>
+            <div class="date-nav">
+                <button class="date-btn" onclick="changeDate(-1)">◀</button>
+                <span class="current-date" id="currentDate">Today</span>
+                <button class="date-btn" onclick="changeDate(1)">▶</button>
+                <button class="today-btn" onclick="goToToday()">Today</button>
+            </div>
+        </div>
+
+        <div class="summary-row">
+            <div class="summary-card">
+                <div class="summary-icon water">💧</div>
+                <div class="summary-value" id="waterSummary">0/8</div>
+                <div class="summary-label">Water (glasses)</div>
+                <div class="summary-progress">
+                    <div class="summary-progress-bar" id="waterProgress" style="width: 0%; background: #2196F3;"></div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon sleep">🌙</div>
+                <div class="summary-value" id="sleepSummary">0h</div>
+                <div class="summary-label">Sleep</div>
+                <div class="summary-progress">
+                    <div class="summary-progress-bar" id="sleepProgress" style="width: 0%; background: #9C27B0;"></div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon steps">👟</div>
+                <div class="summary-value" id="stepsSummary">0</div>
+                <div class="summary-label">Steps</div>
+                <div class="summary-progress">
+                    <div class="summary-progress-bar" id="stepsProgress" style="width: 0%; background: var(--accent);"></div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon mood">😊</div>
+                <div class="summary-value" id="moodSummary">-</div>
+                <div class="summary-label">Mood</div>
+                <div class="summary-progress" style="background: transparent;"></div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Water Card -->
+            <div class="metric-card water" id="waterCard">
+                <div class="card-header">
+                    <div class="card-icon">💧</div>
+                    <div>
+                        <div class="card-title">Water Intake</div>
+                        <div class="card-subtitle">Goal: 8 glasses</div>
+                    </div>
+                </div>
+                <div class="water-display" id="waterGlasses"></div>
+                <div class="water-controls">
+                    <button class="water-btn" onclick="adjustWater(-1)">-1</button>
+                    <button class="water-btn primary" onclick="adjustWater(1)">+1 Glass</button>
+                </div>
+                <div class="water-goal">
+                    <span id="waterCount">0 glasses</span>
+                    <span>Goal: 8</span>
+                </div>
+            </div>
+
+            <!-- Sleep Card -->
+            <div class="metric-card sleep" id="sleepCard">
+                <div class="card-header">
+                    <div class="card-icon">🌙</div>
+                    <div>
+                        <div class="card-title">Sleep</div>
+                        <div class="card-subtitle">Goal: 7-9 hours</div>
+                    </div>
+                </div>
+                <div class="sleep-display">
+                    <span class="sleep-icon">😴</span>
+                    <div>
+                        <span class="sleep-hours" id="sleepHours">0</span>
+                        <span class="sleep-unit">hours</span>
+                    </div>
+                </div>
+                <div class="sleep-quality">
+                    <span class="star" data-value="1" onclick="setSleepQuality(1)">★</span>
+                    <span class="star" data-value="2" onclick="setSleepQuality(2)">★</span>
+                    <span class="star" data-value="3" onclick="setSleepQuality(3)">★</span>
+                    <span class="star" data-value="4" onclick="setSleepQuality(4)">★</span>
+                    <span class="star" data-value="5" onclick="setSleepQuality(5)">★</span>
+                </div>
+                <input type="range" class="sleep-slider" id="sleepSlider" min="0" max="12" value="0" step="0.5" oninput="updateSleepFromSlider()">
+            </div>
+
+            <!-- Steps Card -->
+            <div class="metric-card steps" id="stepsCard">
+                <div class="card-header">
+                    <div class="card-icon">👟</div>
+                    <div>
+                        <div class="card-title">Steps</div>
+                        <div class="card-subtitle">Goal: 10,000</div>
+                    </div>
+                </div>
+                <div class="steps-display">
+                    <div class="steps-ring">
+                        <svg width="100" height="100">
+                            <circle class="bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="progress" id="stepsRing" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="steps-value">
+                            <div class="steps-count" id="stepsCount">0</div>
+                            <div class="steps-label">of 10k</div>
+                        </div>
+                    </div>
+                    <div class="steps-input-wrap">
+                        <input type="number" class="steps-input" id="stepsInput" placeholder="Enter steps" oninput="updateSteps(this.value)">
+                        <div class="steps-goal-text" id="stepsGoalText">0% of daily goal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mood Card -->
+            <div class="metric-card mood" id="moodCard">
+                <div class="card-header">
+                    <div class="card-icon">😊</div>
+                    <div>
+                        <div class="card-title">Mood</div>
+                        <div class="card-subtitle">How are you feeling?</div>
+                    </div>
+                </div>
+                <div class="mood-display">
+                    <span class="mood-emoji" data-value="1" onclick="setMood(1)">😫</span>
+                    <span class="mood-emoji" data-value="2" onclick="setMood(2)">😕</span>
+                    <span class="mood-emoji" data-value="3" onclick="setMood(3)">😐</span>
+                    <span class="mood-emoji" data-value="4" onclick="setMood(4)">🙂</span>
+                    <span class="mood-emoji" data-value="5" onclick="setMood(5)">😄</span>
+                </div>
+                <div class="mood-label" id="moodLabel">Tap an emoji to log</div>
+            </div>
+
+            <!-- Weight Card -->
+            <div class="metric-card weight" id="weightCard">
+                <div class="card-header">
+                    <div class="card-icon">⚖️</div>
+                    <div>
+                        <div class="card-title">Weight</div>
+                        <div class="card-subtitle">Track your progress</div>
+                    </div>
+                </div>
+                <div class="weight-display">
+                    <div class="weight-input-wrap">
+                        <input type="number" class="weight-input" id="weightInput" placeholder="0.0" step="0.1" oninput="updateWeight(this.value)">
+                        <span class="weight-unit" id="weightUnit" onclick="toggleWeightUnit()">kg</span>
+                    </div>
+                </div>
+                <div class="weight-sparkline" id="weightSparkline"></div>
+                <div class="weight-meta">
+                    <span id="weightChange">No data</span>
+                    <span id="weightDate">Last: -</span>
+                </div>
+            </div>
+
+            <!-- Vitals Card -->
+            <div class="metric-card vitals" id="vitalsCard">
+                <div class="card-header">
+                    <div class="card-icon">❤️</div>
+                    <div>
+                        <div class="card-title">Blood Pressure</div>
+                        <div class="card-subtitle">Keep track of your vitals</div>
+                    </div>
+                </div>
+                <div class="vitals-display">
+                    <div class="vital-group">
+                        <label>Systolic</label>
+                        <input type="number" class="vital-input" id="bpSystolic" placeholder="120" oninput="updateBP()">
+                    </div>
+                    <div class="vital-group">
+                        <label>Diastolic</label>
+                        <input type="number" class="vital-input" id="bpDiastolic" placeholder="80" oninput="updateBP()">
+                    </div>
+                    <div class="vital-group">
+                        <label>Pulse (bpm)</label>
+                        <input type="number" class="vital-input" id="pulse" placeholder="72" oninput="updatePulse()">
+                    </div>
+                </div>
+                <div class="vital-status">
+                    <span id="bpStatus">Enter values</span>
+                    <span class="status-badge" id="bpBadge">-</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <div class="mobile-nav-item active">
+                <span class="mobile-nav-icon">📊</span>
+                <span>Dashboard</span>
+            </div>
+            <div class="mobile-nav-item">
+                <span class="mobile-nav-icon">📈</span>
+                <span>Progress</span>
+            </div>
+            <div class="mobile-nav-item">
+                <span class="mobile-nav-icon">🎯</span>
+                <span>Goals</span>
+            </div>
+            <div class="mobile-nav-item">
+                <span class="mobile-nav-icon">⚙️</span>
+                <span>Settings</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script>
+        // State
+        let currentDate = new Date();
+        let healthData = {};
+        let weightUnit = 'kg';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            renderUI();
+            updateDateDisplay();
+        });
+
+        // Data Management
+        function getDateKey(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        function loadData() {
+            const stored = localStorage.getItem('healthTrackerData');
+            if (stored) {
+                healthData = JSON.parse(stored);
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('healthTrackerData', JSON.stringify(healthData));
+        }
+
+        function getTodayData() {
+            const key = getDateKey(currentDate);
+            if (!healthData[key]) {
+                healthData[key] = {
+                    water: 0,
+                    sleep: 0,
+                    sleepQuality: 0,
+                    steps: 0,
+                    mood: 0,
+                    weight: null,
+                    weightUnit: 'kg',
+                    bpSystolic: null,
+                    bpDiastolic: null,
+                    pulse: null
+                };
+            }
+            return healthData[key];
+        }
+
+        function getWeekData() {
+            const weekData = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const key = getDateKey(d);
+                weekData.push(healthData[key]?.weight || null);
+            }
+            return weekData;
+        }
+
+        // UI Rendering
+        function renderUI() {
+            const data = getTodayData();
+            renderWater(data.water);
+            renderSleep(data.sleep, data.sleepQuality);
+            renderSteps(data.steps);
+            renderMood(data.mood);
+            renderWeight(data.weight, data.weightUnit);
+            renderVitals(data);
+            renderSparkline();
+            updateSummary();
+            calculateStreak();
+            calculateScore();
+        }
+
+        function renderWater(count) {
+            const container = document.getElementById('waterGlasses');
+            container.innerHTML = '';
+            for (let i = 0; i < 8; i++) {
+                const glass = document.createElement('div');
+                glass.className = `water-glass ${i < count ? 'filled' : ''}`;
+                glass.onclick = () => adjustWater(i < count ? -1 : 1);
+                container.appendChild(glass);
+            }
+            document.getElementById('waterCount').textContent = `${count} glasses`;
+            
+            if (count >= 8) {
+                document.getElementById('waterCard').classList.add('goal-met');
+            } else {
+                document.getElementById('waterCard').classList.remove('goal-met');
+            }
+        }
+
+        function renderSleep(hours, quality) {
+            document.getElementById('sleepHours').textContent = hours;
+            document.getElementById('sleepSlider').value = hours;
+            document.getElementById('sleepSlider').style.setProperty('--progress', `${(hours/12)*100}%`);
+            
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.classList.toggle('active', star.dataset.value <= quality);
+            });
+
+            if (hours >= 7 && hours <= 9) {
+                document.getElementById('sleepCard').classList.add('goal-met');
+            } else {
+                document.getElementById('sleepCard').classList.remove('goal-met');
+            }
+        }
+
+        function renderSteps(steps) {
+            const progress = Math.min(steps / 10000, 1);
+            const circumference = 283;
+            const offset = circumference * (1 - progress);
+            
+            document.getElementById('stepsRing').style.strokeDashoffset = offset;
+            document.getElementById('stepsCount').textContent = steps.toLocaleString();
+            document.getElementById('stepsInput').value = steps || '';
+            document.getElementById('stepsGoalText').textContent = `${Math.round(progress * 100)}% of daily goal`;
+
+            if (steps >= 10000) {
+                document.getElementById('stepsCard').classList.add('goal-met');
+                if (steps === 10000 && !document.getElementById('stepsCard').classList.contains('celebrated')) {
+                    document.getElementById('stepsCard').classList.add('celebrated');
+                    showConfetti();
+                }
+            } else {
+                document.getElementById('stepsCard').classList.remove('goal-met');
+            }
+        }
+
+        function renderMood(value) {
+            const emojis = document.querySelectorAll('.mood-emoji');
+            emojis.forEach(emoji => {
+                emoji.classList.toggle('active', emoji.dataset.value == value);
+            });
+            
+            const labels = ['', 'Terrible', 'Bad', 'Okay', 'Good', 'Great'];
+            document.getElementById('moodLabel').textContent = value ? labels[value] : 'Tap an emoji to log';
+        }
+
+        function renderWeight(weight, unit) {
+            document.getElementById('weightInput').value = weight || '';
+            document.getElementById('weightUnit').textContent = unit;
+            weightUnit = unit;
+        }
+
+        function renderSparkline() {
+            const weekData = getWeekData();
+            const container = document.getElementById('weightSparkline');
+            container.innerHTML = '';
+            
+            const validData = weekData.filter(v => v !== null);
+            if (validData.length === 0) {
+                return;
+            }
+            
+            const max = Math.max(...validData);
+            const min = Math.min(...validData);
+            const range = max - min || 1;
+            
+            weekData.forEach((val, i) => {
+                const bar = document.createElement('div');
+                bar.className = 'spark-bar';
+                if (val !== null) {
+                    const height = ((val - min) / range) * 32 + 4;
+                    bar.style.height = `${height}px`;
+                    if (i === 6) bar.style.background = 'var(--primary)';
+                }
+                container.appendChild(bar);
+            });
+
+            if (validData.length >= 2) {
+                const change = validData[validData.length - 1] - validData[0];
+                document.getElementById('weightChange').textContent = 
+                    `${change > 0 ? '+' : ''}${change.toFixed(1)} ${weightUnit} this week`;
+            }
+        }
+
+        function renderVitals(data) {
+            document.getElementById('bpSystolic').value = data.bpSystolic || '';
+            document.getElementById('bpDiastolic').value = data.bpDiastolic || '';
+            document.getElementById('pulse').value = data.pulse || '';
+            updateBPStatus(data.bpSystolic, data.bpDiastolic);
+        }
+
+        function updateSummary() {
+            const data = getTodayData();
+            
+            document.getElementById('waterSummary').textContent = `${data.water}/8`;
+            document.getElementById('waterProgress').style.width = `${(data.water/8)*100}%`;
+            
+            document.getElementById('sleepSummary').textContent = `${data.sleep}h`;
+            document.getElementById('sleepProgress').style.width = `${(data.sleep/9)*100}%`;
+            
+            document.getElementById('stepsSummary').textContent = data.steps.toLocaleString();
+            document.getElementById('stepsProgress').style.width = `${Math.min((data.steps/10000)*100, 100)}%`;
+            
+            const moodEmojis = ['', '😫', '😕', '😐', '🙂', '😄'];
+            document.getElementById('moodSummary').textContent = data.mood ? moodEmojis[data.mood] : '-';
+        }
+
+        // Actions
+        function adjustWater(delta) {
+            const data = getTodayData();
+            data.water = Math.max(0, Math.min(12, data.water + delta));
+            saveData();
+            renderWater(data.water);
+            updateSummary();
+            checkGoalCelebration('water', data.water >= 8);
+            calculateScore();
+        }
+
+        function updateSleepFromSlider() {
+            const hours = parseFloat(document.getElementById('sleepSlider').value);
+            const data = getTodayData();
+            data.sleep = hours;
+            saveData();
+            renderSleep(hours, data.sleepQuality);
+            updateSummary();
+            checkGoalCelebration('sleep', hours >= 7 && hours <= 9);
+            calculateScore();
+        }
+
+        function setSleepQuality(quality) {
+            const data = getTodayData();
+            data.sleepQuality = quality;
+            saveData();
+            renderSleep(data.sleep, quality);
+        }
+
+        function updateSteps(value) {
+            const steps = parseInt(value) || 0;
+            const data = getTodayData();
+            data.steps = steps;
+            saveData();
+            renderSteps(steps);
+            updateSummary();
+            calculateScore();
+        }
+
+        function setMood(value) {
+            const data = getTodayData();
+            data.mood = value;
+            saveData();
+            renderMood(value);
+            updateSummary();
+            calculateScore();
+            if (value >= 4) {
+                showConfetti();
+            }
+        }
+
+        function updateWeight(value) {
+            const weight = parseFloat(value) || null;
+            const data = getTodayData();
+            data.weight = weight;
+            data.weightUnit = weightUnit;
+            saveData();
+            renderSparkline();
+            calculateScore();
+        }
+
+        function toggleWeightUnit() {
+            weightUnit = weightUnit === 'kg' ? 'lbs' : 'kg';
+            document.getElementById('weightUnit').textContent = weightUnit;
+            const data = getTodayData();
+            if (data.weight) {
+                if (weightUnit === 'lbs') {
+                    data.weight = Math.round(data.weight * 2.20462 * 10) / 10;
+                } else {
+                    data.weight = Math.round(data.weight / 2.20462 * 10) / 10;
+                }
+                document.getElementById('weightInput').value = data.weight;
+            }
+            data.weightUnit = weightUnit;
+            saveData();
+        }
+
+        function updateBP() {
+            const sys = parseInt(document.getElementById('bpSystolic').value) || null;
+            const dia = parseInt(document.getElementById('bpDiastolic').value) || null;
+            const data = getTodayData();
+            data.bpSystolic = sys;
+            data.bpDiastolic = dia;
+            saveData();
+            updateBPStatus(sys, dia);
+            calculateScore();
+        }
+
+        function updatePulse() {
+            const pulse = parseInt(document.getElementById('pulse').value) || null;
+            const data = getTodayData();
+            data.pulse = pulse;
+            saveData();
+            calculateScore();
+        }
+
+        function updateBPStatus(sys, dia) {
+            const statusEl = document.getElementById('bpStatus');
+            const badgeEl = document.getElementById('bpBadge');
+            
+            if (!sys || !dia) {
+                statusEl.textContent = 'Enter values';
+                badgeEl.textContent = '-';
+                badgeEl.className = 'status-badge';
+                return;
+            }
+            
+            if (sys < 120 && dia < 80) {
+                statusEl.textContent = 'Optimal';
+                badgeEl.textContent = 'Optimal';
+                badgeEl.className = 'status-badge optimal';
+            } else if (sys < 130 && dia < 80) {
+                statusEl.textContent = 'Elevated';
+                badgeEl.textContent = 'Good';
+                badgeEl.className = 'status-badge elevated';
+            } else if (sys < 140 || dia < 90) {
+                statusEl.textContent = 'High Stage 1';
+                badgeEl.textContent = 'High';
+                badgeEl.className = 'status-badge elevated';
+            } else {
+                statusEl.textContent = 'High Stage 2';
+                badgeEl.textContent = 'High';
+                badgeEl.className = 'status-badge high';
+            }
+        }
+
+        // Date Navigation
+        function changeDate(delta) {
+            currentDate.setDate(currentDate.getDate() + delta);
+            if (currentDate > new Date()) {
+                currentDate = new Date();
+            }
+            updateDateDisplay();
+            renderUI();
+        }
+
+        function goToToday() {
+            currentDate = new Date();
+            updateDateDisplay();
+            renderUI();
+        }
+
+        function updateDateDisplay() {
+            const today = new Date();
+            const isToday = getDateKey(currentDate) === getDateKey(today);
+            const options = { weekday: 'short', month: 'short', day: 'numeric' };
+            document.getElementById('currentDate').textContent = isToday ? 'Today' : currentDate.toLocaleDateString('en-US', options);
+        }
+
+        // Sidebar
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.sidebar-overlay').classList.toggle('open');
+        }
+
+        // Celebrations
+        function checkGoalCelebration(metric, achieved) {
+            if (achieved) {
+                setTimeout(showConfetti, 300);
+            }
+        }
+
+        function showConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#C8956C', '#8FAE7D', '#2D4A3E', '#FFD700', '#FF6B6B'];
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                container.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+
+        // Stats
+        function calculateStreak() {
+            let streak = 0;
+            const today = new Date();
+            
+            for (let i = 0; i < 365; i++) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const key = getDateKey(d);
+                const data = healthData[key];
+                
+                if (data && data.water >= 8) {
+                    streak++;
+                } else if (i === 0 && (!data || data.water < 8)) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            
+            document.getElementById('streak').textContent = `${streak} days`;
+        }
+
+        function calculateScore() {
+            const data = getTodayData();
+            let score = 0;
+            let maxScore = 0;
+            
+            if (data.water > 0) {
+                maxScore += 20;
+                score += Math.min(data.water / 8, 1) * 20;
+            }
+            if (data.sleep > 0) {
+                maxScore += 20;
+                const sleepScore = data.sleep >= 7 && data.sleep <= 9 ? 1 : (data.sleep > 9 ? 0.7 : data.sleep / 7 * 0.7);
+                score += sleepScore * 20;
+            }
+            if (data.steps > 0) {
+                maxScore += 20;
+                score += Math.min(data.steps / 10000, 1) * 20;
+            }
+            if (data.mood > 0) {
+                maxScore += 20;
+                score += (data.mood / 5) * 20;
+            }
+            if (data.bpSystolic && data.bpDiastolic) {
+                maxScore += 20;
+                if (data.bpSystolic < 120 && data.bpDiastolic < 80) {
+                    score += 20;
+                } else if (data.bpSystolic < 130) {
+                    score += 15;
+                } else {
+                    score += 10;
+                }
+            }
+            
+            const finalScore = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+            document.getElementById('score').textContent = `${finalScore}%`;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && !e.target.matches('input')) {
+                changeDate(1);
+            } else if (e.key === 'ArrowLeft' && !e.target.matches('input')) {
+                changeDate(-1);
+            } else if (e.key === 't' && !e.target.matches('input')) {
+                goToToday();
+            }
+        });
+    </script>
+</body>
+</html>

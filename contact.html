@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Daily Vitality & Longevity Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Daily Vitality</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="fitness.html">Fitness</a></li>
+                <li><a href="mindfulness.html">Mindfulness</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="health-tracker.html">Health Tracker</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-content">
+        <div class="page-header">
+            <div class="container">
+                <h1>Get in Touch</h1>
+                <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="support">Technical Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                    <div class="form-success" id="form-success">
+                        Thank you for your message! We'll get back to you within 24-48 hours.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" style="background: var(--secondary);">
+            <div class="container">
+                <h2 class="section-title">Other Ways to Reach Us</h2>
+                <div class="content-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div class="content-card" style="text-align: center;">
+                        <div class="feature-icon" style="font-size: 2.5rem;">📧</div>
+                        <h3>Email</h3>
+                        <p>hello@vitalityhub.com</p>
+                        <p>support@vitalityhub.com</p>
+                    </div>
+                    <div class="content-card" style="text-align: center;">
+                        <div class="feature-icon" style="font-size: 2.5rem;">📞</div>
+                        <h3>Phone</h3>
+                        <p>1-800-VITALITY</p>
+                        <p>Mon-Fri, 9am-5pm EST</p>
+                    </div>
+                    <div class="content-card" style="text-align: center;">
+                        <div class="feature-icon" style="font-size: 2.5rem;">📍</div>
+                        <h3>Location</h3>
+                        <p>123 Wellness Way</p>
+                        <p>Healthy City, HC 12345</p>
+                    </div>
+                    <div class="content-card" style="text-align: center;">
+                        <div class="feature-icon" style="font-size: 2.5rem;">💬</div>
+                        <h3>Social Media</h3>
+                        <p>Follow us for daily tips</p>
+                        <p>@DailyVitalityHub</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>How can I subscribe to your newsletter?</h3>
+                        <p>Simply enter your email in the newsletter signup form on any page and click Subscribe. You'll receive weekly health tips and updates.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Are your articles medically reviewed?</h3>
+                        <p>Yes, all our health-related content is reviewed by qualified healthcare professionals to ensure accuracy and safety.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Can I contribute content?</h3>
+                        <p>We occasionally accept guest contributions. Please contact us with your pitch and relevant credentials.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>How do I report incorrect information?</h3>
+                        <p>We strive for accuracy but appreciate your vigilance. Contact us with the specific content and your concerns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h4>About</h4>
+                    <p>Daily Vitality & Longevity Hub is your trusted source for evidence-based health and wellness information.</p>
+                </div>
+                <div class="footer-quick-links">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-categories">
+                    <h4>Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="nutrition.html">Nutrition</a></li>
+                        <li><a href="fitness.html">Fitness</a></li>
+                        <li><a href="mindfulness.html">Mindfulness</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li>hello@vitalityhub.com</li>
+                        <li>1-800-VITALITY</li>
+                    </ul>
+                    <div class="footer-social">
+                        <a href="#">📘</a>
+                        <a href="#">📸</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📧</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Daily Vitality & Longevity Hub. Your journey to a longer, healthier life starts here.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const successMessage = document.getElementById('form-success');
+            
+            if (form.checkValidity()) {
+                successMessage.classList.add('show');
+                form.reset();
+                
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

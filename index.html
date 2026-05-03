@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Vitality & Longevity Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">Daily Vitality</span>
+            </a>
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-desktop">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="nutrition.html" class="nav-link">Nutrition</a>
+                <a href="fitness.html" class="nav-link">Fitness</a>
+                <a href="mindfulness.html" class="nav-link">Mindfulness</a>
+                <a href="resources.html" class="nav-link">Resources</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-link active">Home</a>
+            <a href="nutrition.html" class="mobile-link">Nutrition</a>
+            <a href="fitness.html" class="mobile-link">Fitness</a>
+            <a href="mindfulness.html" class="mobile-link">Mindfulness</a>
+            <a href="resources.html" class="mobile-link">Resources</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+            <a href="health-tracker.html" class="mobile-link">Health Tracker</a>
+        </nav>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <span class="leaf leaf-1">🍃</span>
+            <span class="leaf leaf-2">🌱</span>
+            <span class="leaf leaf-3">🍂</span>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Your Journey to</span>
+                    <span class="title-line accent">Vitality & Longevity</span>
+                </h1>
+                <p class="hero-subtitle">Discover evidence-based strategies to enhance your health, wellness, and lifespan through science-backed approaches.</p>
+                <div class="hero-buttons">
+                    <a href="#features" class="btn btn-primary">Explore Vitality Tips</a>
+                    <a href="health-tracker.html" class="btn btn-tracker">Health Tracker</a>
+                    <a href="resources.html" class="btn btn-secondary">View Resources</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Wellness Topics</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Expert Guides</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10k+</span>
+                        <span class="stat-label">Community Members</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Core Principles</span>
+                <h2 class="section-title">Featured Topics</h2>
+                <p class="section-desc">Explore our comprehensive approach to wellness across multiple domains.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🥗</div>
+                    <h3 class="feature-title">Nutrition</h3>
+                    <p class="feature-desc">Evidence-based dietary strategies to fuel your body with optimal nutrients.</p>
+                    <a href="nutrition.html" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏃</div>
+                    <h3 class="feature-title">Fitness</h3>
+                    <p class="feature-desc">Movement routines designed to build strength, flexibility, and endurance.</p>
+                    <a href="fitness.html" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧘</div>
+                    <h3 class="feature-title">Mindfulness</h3>
+                    <p class="feature-desc">Mental wellness practices to reduce stress and enhance clarity.</p>
+                    <a href="mindfulness.html" class="feature-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Premium Selection</span>
+                <h2 class="section-title">Top-Rated Supplements</h2>
+                <p class="section-desc">Scientifically formulated products to support your health goals. Choose your category below.</p>
+            </div>
+            
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="blood-sugar">🩸 Blood Support</button>
+                <button class="tab-btn" data-category="joint">🦴 Joint & Mobility</button>
+                <button class="tab-btn" data-category="weight-loss">⚖️ Weight Loss</button>
+                <button class="tab-btn" data-category="memory">🧠 Memory Support</button>
+            </div>
+
+            <div class="products-grid active" id="blood-sugar">
+                <div class="product-card">
+                    <div class="product-badge">Top Rated</div>
+                    <img src="https://cellucare.com/assets/img/product-image.png" alt="CelluCare" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🌿</span>
+                    <h3>CelluCare</h3>
+                    <p class="product-desc">Premium blood sugar support with clinically researched ingredients for healthy glucose metabolism.</p>
+                    <div class="product-rating">★★★★★ (2,847 reviews)</div>
+                    <a href="https://1c10fz3cutbu2w5ysgnjq9y147.hop.clickbank.net" target="_blank" class="product-btn btn-product-primary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://gluco6.com/assets/img/product-image.png" alt="Gluco6" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🩸</span>
+                    <h3>Gluco6</h3>
+                    <p class="product-desc">Advanced formula with berberine, chromium & cinnamon to maintain healthy blood sugar levels naturally.</p>
+                    <div class="product-rating">★★★★★ (1,456 reviews)</div>
+                    <a href="https://2d58843dvymn1o8b-fidbo9ua9.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://glucoberry.com/assets/img/product-image.png" alt="GlucoBerry" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🫐</span>
+                    <h3>GlucoBerry</h3>
+                    <p class="product-desc">Unique berry-based formula designed to support healthy blood sugar and improve insulin sensitivity.</p>
+                    <div class="product-rating">★★★★★ (1,203 reviews)</div>
+                    <a href="https://586015x6xrgk8xa2yqj9obvf2c.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://glucoextend.com/assets/img/product-image.png" alt="Gluco Extend" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">💚</span>
+                    <h3>Gluco Extend</h3>
+                    <p class="product-desc">Comprehensive blood sugar support with extended-release formula for all-day glucose management.</p>
+                    <div class="product-rating">★★★★☆ (892 reviews)</div>
+                    <a href="https://477c958zonmnfw75tmjgs5-v15.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://gluconite.com/assets/img/product-image.png" alt="GlucoNite" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🌙</span>
+                    <h3>GlucoNite</h3>
+                    <p class="product-desc">Night-time blood sugar support formula designed to work while you sleep for optimal results.</p>
+                    <div class="product-rating">★★★★☆ (678 reviews)</div>
+                    <a href="https://0538408a-0dx5q0bved8x87757.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://glucotonic.com/assets/img/product-image.png" alt="GlucoTonic" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">⚡</span>
+                    <h3>GlucoTonic</h3>
+                    <p class="product-desc">Energizing blood sugar support with B-vitamins and adaptogens for metabolic balance.</p>
+                    <div class="product-rating">★★★★☆ (534 reviews)</div>
+                    <a href="https://ca7d7735vqiy2xcdvpel-b0gmh.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://glucotrust.com/assets/img/product-image.png" alt="GlucoTrust" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🛡️</span>
+                    <h3>GlucoTrust</h3>
+                    <p class="product-desc">Complete blood sugar defense formula with powerful antioxidants and herbal extracts.</p>
+                    <div class="product-rating">★★★★★ (1,789 reviews)</div>
+                    <a href="https://a6c39y51tzex1z192gxm13uhee.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <span class="product-image">💎</span>
+                    <h3>RegenVive</h3>
+                    <p class="product-desc">Regenerative blood sugar support with premium ingredients for long-term metabolic health.</p>
+                    <div class="product-rating">★★★★☆ (432 reviews)</div>
+                    <a href="https://hop.clickbank.net/?custom=1&affiliate=atel16&vendor=regenvive&pid=new" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://sugardefender.com/assets/img/product-image.png" alt="Sugar Defender" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🍃</span>
+                    <h3>Sugar Defender</h3>
+                    <p class="product-desc">Powerful blood sugar support formula with natural ingredients to maintain healthy glucose levels.</p>
+                    <div class="product-rating">★★★★★ (987 reviews)</div>
+                    <a href="https://0a6faw69m0bs4t9c52cqscuob6.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+            </div>
+
+            <div class="products-grid" id="joint">
+                <div class="product-card">
+                    <div class="product-badge">Top Rated</div>
+                    <img src="https://nunerve.com/assets/images/1-desktop.png" alt="Nu Nerve" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🧠</span>
+                    <h3>Nu Nerve</h3>
+                    <p class="product-desc">Advanced nerve support formula with premium ingredients for nerve health and comfort.</p>
+                    <div class="product-rating">★★★★★ (2,156 reviews)</div>
+                    <a href="https://5f4a3xv5-z9p2o198eum415ocs.hop.clickbank.net" target="_blank" class="product-btn btn-product-primary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://nervearmor.com/assets/images/1-desktop.png" alt="Nerve Armor" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🛡️</span>
+                    <h3>Nerve Armor</h3>
+                    <p class="product-desc">Complete nerve defense formula with B-vitamins and herbal extracts for nerve support.</p>
+                    <div class="product-rating">★★★★★ (1,789 reviews)</div>
+                    <a href="https://4f09ev8cmv8y0y5mpm97ojr86g.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://jointvive.com/assets/images/1-desktop.png" alt="JointVive" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🦴</span>
+                    <h3>JointVive</h3>
+                    <p class="product-desc">Premium joint health formula with glucosamine, chondroitin & MSM for mobility support.</p>
+                    <div class="product-rating">★★★★★ (3,421 reviews)</div>
+                    <a href="https://580dc87-ty9qdl8cwcyp2cz9df.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://jointrestoregummies.com/assets/images/1-desktop.png" alt="Joint Restore Gummies" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🍬</span>
+                    <h3>Joint Restore Gummies</h3>
+                    <p class="product-desc">Delicious gummies with collagen and joint-supporting ingredients for daily joint health.</p>
+                    <div class="product-rating">★★★★★ (1,567 reviews)</div>
+                    <a href="https://9876ew1-mz8lfl63v90h21ws8n.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://jointn11.com/assets/images/1-desktop.png" alt="Joint N-11" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">💊</span>
+                    <h3>Joint N-11</h3>
+                    <p class="product-desc">Comprehensive joint support with 11 powerful ingredients for flexibility and comfort.</p>
+                    <div class="product-rating">★★★★☆ (987 reviews)</div>
+                    <a href="https://f59fb-47wzaw8qbez4-g-ydv8p.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://jointgenesis.com/assets/images/1-desktop.png" alt="Joint Genesis" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🌿</span>
+                    <h3>Joint Genesis</h3>
+                    <p class="product-desc">Genesis-level joint support with innovative ingredients for joint repair and regeneration.</p>
+                    <div class="product-rating">★★★★★ (2,341 reviews)</div>
+                    <a href="https://9ec9f1z2mxdublc5p3tkrb0u04.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://balmorexpro.com/assets/images/1-desktop.png" alt="Balmorex Pro" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">💪</span>
+                    <h3>Balmorex Pro</h3>
+                    <p class="product-desc">Professional-grade joint balm and supplement combo for advanced joint comfort and mobility.</p>
+                    <div class="product-rating">★★★★☆ (654 reviews)</div>
+                    <a href="https://4f174vz0zoal6l52h9uh427xca.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://arcticblast.com/assets/images/1-desktop.png" alt="Arctic Blast" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">❄️</span>
+                    <h3>Arctic Blast</h3>
+                    <p class="product-desc">Fast-acting topical pain relief with cooling sensation for joint and muscle comfort.</p>
+                    <div class="product-rating">★★★★★ (2,891 reviews)</div>
+                    <a href="https://59df3-2-rslwcr163329q42u32.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+            </div>
+
+            <div class="products-grid" id="weight-loss">
+                <div class="product-card">
+                    <div class="product-badge">Top Rated</div>
+                    <img src="https://mitolyn.com/assets/images/6-desktop.png" alt="Mitolyn" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">⚡</span>
+                    <h3>Mitolyn</h3>
+                    <p class="product-desc">Advanced mitochondrial support formula to boost metabolism and support healthy weight loss.</p>
+                    <div class="product-rating">★★★★★ (4,102 reviews)</div>
+                    <a href="https://d3d536z1yngq0pc9ls2f1dak93.hop.clickbank.net" target="_blank" class="product-btn btn-product-primary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://hepatoburn.com/assets/images/1-desktop.png" alt="HepatoBurn" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🫁</span>
+                    <h3>HepatoBurn</h3>
+                    <p class="product-desc">Liver support formula designed to enhance fat metabolism and detox for weight management.</p>
+                    <div class="product-rating">★★★★★ (2,156 reviews)</div>
+                    <a href="https://8d691x6cutgwbxf6qfdrz7zhvz.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://javaburn.com/assets/images/1-desktop.png" alt="Java Burn" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">☕</span>
+                    <h3>Java Burn</h3>
+                    <p class="product-desc">Metabolism-boosting coffee additive with natural ingredients for enhanced fat burning.</p>
+                    <div class="product-rating">★★★★★ (3,891 reviews)</div>
+                    <a href="https://cf04a602tpaq1y0hdih37l1u9g.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://naganotonic.com/assets/images/1-desktop.png" alt="Nagano Tonic" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🌿</span>
+                    <h3>Nagano Tonic</h3>
+                    <p class="product-desc">Japanese-inspired fat-burning tonic with powerful antioxidants and metabolism boosters.</p>
+                    <div class="product-rating">★★★★★ (1,789 reviews)</div>
+                    <a href="https://f3bcc72cqomofl75pn1ay15k0m.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://keyslim.com/assets/images/1-desktop.png" alt="KeySlim" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🔑</span>
+                    <h3>KeySlim</h3>
+                    <p class="product-desc">Slimming complex with key ingredients to support healthy weight management and appetite control.</p>
+                    <div class="product-rating">★★★★☆ (1,234 reviews)</div>
+                    <a href="https://0764f0wdnqfp1v78uoygueeo6e.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://leanbiome.com/assets/images/1-desktop.png" alt="LeanBiome" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🧬</span>
+                    <h3>LeanBiome</h3>
+                    <p class="product-desc">gut health and weight management formula with diverse probiotic strains for metabolic support.</p>
+                    <div class="product-rating">★★★★★ (2,341 reviews)</div>
+                    <a href="https://510c5x-bnvaydzecfzswn8-704.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://leanbliss.com/assets/images/1-desktop.png" alt="Lean Bliss" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">😊</span>
+                    <h3>Lean Bliss</h3>
+                    <p class="product-desc">Mood-supporting weight loss formula that helps manage stress-related eating for better results.</p>
+                    <div class="product-rating">★★★★☆ (987 reviews)</div>
+                    <a href="https://c08a1v65urkv5z2yyzf40r4p59.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://livpure.com/assets/images/1-desktop.png" alt="Liv Pure" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">💧</span>
+                    <h3>Liv Pure</h3>
+                    <p class="product-desc">Liver detox and weight loss support formula for enhanced fat burning and energy.</p>
+                    <div class="product-rating">★★★★★ (2,567 reviews)</div>
+                    <a href="https://1486288dxwiq3r5bxf2h2cctao.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://okinawaflatbellytonic.com/assets/images/1-desktop.png" alt="Okinawa Flat Belly Tonic" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🍵</span>
+                    <h3>Okinawa Flat Belly Tonic</h3>
+                    <p class="product-desc">Traditional Japanese tonic for metabolism support and healthy weight management.</p>
+                    <div class="product-rating">★★★★★ (3,456 reviews)</div>
+                    <a href="https://d3996360ypfy4t17qkq9ybdt4n.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+            </div>
+
+            <div class="products-grid" id="memory">
+                <div class="product-card">
+                    <div class="product-badge">Top Rated</div>
+                    <img src="https://cognicarepro.com/assets/images/1-desktop.png" alt="CogniCare Pro" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🧠</span>
+                    <h3>CogniCare Pro</h3>
+                    <p class="product-desc">Advanced cognitive support formula with premium nootropics for memory, focus and mental clarity.</p>
+                    <div class="product-rating">★★★★★ (2,934 reviews)</div>
+                    <a href="https://2dce661azskzfu56z7t4n9-99f.hop.clickbank.net" target="_blank" class="product-btn btn-product-primary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://cognisurge.com/assets/images/1-desktop.png" alt="CogniSurge" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">⚡</span>
+                    <h3>CogniSurge</h3>
+                    <p class="product-desc">Fast-acting nootropic surge for instant mental energy, focus and cognitive performance.</p>
+                    <div class="product-rating">★★★★★ (1,678 reviews)</div>
+                    <a href="https://b862f-02mthx6kf2yfsc4pscir.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://javabrain.com/assets/images/1-desktop.png" alt="Java Brain" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">☕</span>
+                    <h3>Java Brain</h3>
+                    <p class="product-desc">Brain-boosting coffee blend with nootropics for enhanced mental function and alertness.</p>
+                    <div class="product-rating">★★★★★ (1,456 reviews)</div>
+                    <a href="https://52c09025to9nfp6ekhpa6wlgcw.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://neuroprime.com/assets/images/1-desktop.png" alt="NeuroPrime" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🎯</span>
+                    <h3>NeuroPrime</h3>
+                    <p class="product-desc">Comprehensive nootropic prime formula for long-term brain health and cognitive function.</p>
+                    <div class="product-rating">★★★★★ (987 reviews)</div>
+                    <a href="https://5405ewu3szbz3q49lr-hugylnq.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://neurosurge.com/assets/images/1-desktop.png" alt="Neuro Surge" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🧩</span>
+                    <h3>Neuro Surge</h3>
+                    <p class="product-desc">Powerful brain surge formula with advanced ingredients for mental performance and memory.</p>
+                    <div class="product-rating">★★★★★ (2,123 reviews)</div>
+                    <a href="https://bb85c5v10-cq4o62kr15xirld1.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://neurothrive.com/assets/images/1-desktop.png" alt="Neuro-Thrive" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🚀</span>
+                    <h3>Neuro-Thrive</h3>
+                    <p class="product-desc">Thrive-level cognitive support for mental energy, focus and brain optimization.</p>
+                    <div class="product-rating">★★★★☆ (876 reviews)</div>
+                    <a href="https://7ee7e8420n8z2kfiup0e-btd4p.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://neurozoom.com/assets/images/1-desktop.png" alt="NeuroZoom" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🔍</span>
+                    <h3>NeuroZoom</h3>
+                    <p class="product-desc">Zoom into sharper focus with this advanced brain support formula for mental clarity.</p>
+                    <div class="product-rating">★★★★★ (1,789 reviews)</div>
+                    <a href="https://f08642x7x-lw9u0ctewi2bqj64.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://pinealpure.com/assets/images/1-desktop.png" alt="Pineal Pure" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">🌟</span>
+                    <h3>Pineal Pure</h3>
+                    <p class="product-desc">Pure pineal gland support formula for mental clarity, focus and brain health optimization.</p>
+                    <div class="product-rating">★★★★☆ (654 reviews)</div>
+                    <a href="https://21fca--0o-ax6p3erkumvas8bj.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://promindcomplex.com/assets/images/1-desktop.png" alt="ProMind Complex" class="product-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span class="product-image" style="display:none;">💎</span>
+                    <h3>ProMind Complex</h3>
+                    <p class="product-desc">Complete brain complex for memory, focus and cognitive function with premium ingredients.</p>
+                    <div class="product-rating">★★★★★ (1,234 reviews)</div>
+                    <a href="https://a915f5-2urineyco59z7ubel2r.hop.clickbank.net" target="_blank" class="product-btn btn-product-secondary">Shop Now</a>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 32px; color: var(--text-secondary); font-size: 14px;">
+                🔒 Secure checkout • 30-day money-back guarantee • Free shipping on orders over $49
+            </p>
+        </div>
+    </section>
+
+    <section class="daily-tips" id="tips">
+        <div class="container">
+            <div class="tips-wrapper">
+                <div class="tips-content">
+                    <div class="section-header">
+                        <span class="section-tag">Daily Wellness</span>
+                        <h2 class="section-title">Daily Tips</h2>
+                    </div>
+                    <div class="tip-display">
+                        <span class="tip-icon">💡</span>
+                        <p class="tip-text" id="tip-text"></p>
+                    </div>
+                    <div class="tip-nav">
+                        <button class="tip-arrow" id="prev-tip" aria-label="Previous tip">←</button>
+                        <div class="tip-dots" id="tip-dots"></div>
+                        <button class="tip-arrow" id="next-tip" aria-label="Next tip">→</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="longevity" id="longevity">
+        <div class="container">
+            <div class="about-grid">
+                <div class="image-placeholder" style="height: 350px;">🧬</div>
+                <div class="about-text">
+                    <span class="section-tag">The Science</span>
+                    <h2 class="section-title">The Science of Aging</h2>
+                    <p>Explore the latest research in longevity science and discover how you can optimize your healthspan through evidence-based interventions.</p>
+                    <div class="accordion" style="margin-top: 24px;">
+                        <details class="accordion-item">
+                            <summary class="accordion-header">Cellular Senescence</summary>
+                            <p style="color: var(--text-secondary); padding: 12px 0;">Senescent cells accumulate as we age, contributing to chronic inflammation. Strategies like senolytics and lifestyle interventions can help clear these cells and improve tissue function.</p>
+                        </details>
+                        <details class="accordion-item">
+                            <summary class="accordion-header">Telomere Biology</summary>
+                            <p style="color: var(--text-secondary); padding: 12px 0;">Telomeres protect our DNA and shorten with each cell division. Research shows that stress reduction, proper nutrition, and regular exercise can help maintain telomere length.</p>
+                        </details>
+                        <details class="accordion-item">
+                            <summary class="accordion-header">Mitochondrial Health</summary>
+                            <p style="color: var(--text-secondary); padding: 12px 0;">Mitochondria are the powerhouses of our cells. Supporting them through interval training, adequate sleep, and specific nutrients can enhance energy production and reduce aging markers.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Success Stories</span>
+                <h2 class="section-title">What Our Community Says</h2>
+            </div>
+            <div class="testimonial-carousel">
+                <div class="testimonial-track" id="testimonial-track">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"The daily tips have transformed my morning routine. I feel more energized and focused throughout the day. The nutrition guidance helped me lose 15 pounds naturally!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SM</div>
+                            <div class="author-info">
+                                <span class="author-name">Sarah Mitchell</span>
+                                <span class="author-title">Health Enthusiast</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"I've tried many wellness programs, but this approach is different. It's sustainable and backed by science. The mindfulness exercises reduced my anxiety significantly."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JC</div>
+                            <div class="author-info">
+                                <span class="author-name">James Chen</span>
+                                <span class="author-title">Software Engineer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"At 58, I feel better than I did at 40. The fitness routines are gentle yet effective, and the community support is incredible. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RP</div>
+                            <div class="author-info">
+                                <span class="author-name">Robert Patterson</span>
+                                <span class="author-title">Retired Teacher</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-dots" id="carousel-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <span class="section-tag">Stay Connected</span>
+                <h2 class="section-title">Join the Vitality Community</h2>
+                <p class="newsletter-desc">Get daily wellness tips and longevity insights delivered to your inbox.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" class="newsletter-input" id="email-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <p class="newsletter-note">We respect your privacy. Unsubscribe at any time.</p>
+                <p class="newsletter-success" id="newsletter-success">✓ Thank you for subscribing! Check your inbox for a welcome message.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-preview">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="section-tag">About Us</span>
+                    <h2 class="section-title">Your Partner in Wellness</h2>
+                    <p>Daily Vitality & Longevity Hub is dedicated to helping you live your healthiest, longest life through evidence-based strategies and community support.</p>
+                    <p>Our approach combines the latest scientific research with practical, actionable advice that you can integrate into your daily routine.</p>
+                    <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+                </div>
+                <div class="image-placeholder">🌿</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span>🌿</span>
+                        Daily Vitality
+                    </div>
+                    <p class="footer-desc">Your trusted source for evidence-based wellness and longevity strategies.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">f</a>
+                        <a href="#" class="social-link" aria-label="Twitter">t</a>
+                        <a href="#" class="social-link" aria-label="Instagram">i</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="nutrition.html">Nutrition</a></li>
+                        <li><a href="fitness.html">Fitness</a></li>
+                        <li><a href="mindfulness.html">Mindfulness</a></li>
+                        <li><a href="health-tracker.html">Health Tracker</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">Topics</h4>
+                    <ul class="footer-links">
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="#tips">Daily Tips</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#newsletter">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-contact">
+                        <li>About Us</li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact Form</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Daily Vitality & Longevity Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Product Category Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                // Update active tab button
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding products
+                document.querySelectorAll('.products-grid').forEach(grid => {
+                    grid.classList.remove('active');
+                });
+                document.getElementById(category).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
