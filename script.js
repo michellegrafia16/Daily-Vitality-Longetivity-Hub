@@ -283,7 +283,7 @@ function initNewsletterForm() {
         if (email) {
             try {
                 console.log('Sending POST request...');
-                const response = await fetch('/newsletter', {
+                const response = await fetch('/api/newsletter', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email })
@@ -340,7 +340,7 @@ function initContactForm() {
                 };
 
                 try {
-                    const response = await fetch(window.location.pathname === '/' ? '/contact' : '/contact', {
+                    const response = await fetch('/api/contact', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData)
