@@ -45,19 +45,29 @@
         .important-notice { background: #F0F4F2; padding: 24px; border-radius: 8px; border-left: 4px solid var(--primary); margin: 24px 0; }
         .last-updated { color: var(--text-secondary); font-size: 14px; margin-bottom: 32px; }
         @media (max-width: 768px) { .content { padding: 24px; } .nav-links { display: none; } }
+        .hamburger { display: none; cursor: pointer; }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; flex-direction: column; gap: 5px; }
+            .nav-links { display: none; }
+        }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">Daily Vitality</a>
+            <a href="index.html" class="logo">🌿 Daily Vitality</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#products">Products</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="affiliate-disclaimer.html">Affiliate Disclaimer</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="fitness.html">Fitness</a></li>
+                <li><a href="mindfulness.html">Mindfulness</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="hamburger">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
     <div class="container">
