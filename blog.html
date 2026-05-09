@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Daily Vitality & Longevity Hub</title>
+    <meta name="description" content="Expert guides and supplement reviews for blood sugar support, joint health, weight loss, and brain wellness. Science-backed wellness insights.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .blog-hero {
+            padding: 140px 5% 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--background) 100%);
+        }
+        .blog-hero h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        .blog-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .blog-grid {
+            padding: 80px 5%;
+            background: var(--card-bg);
+        }
+        .blog-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .blog-card {
+            background: var(--background);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px var(--shadow);
+            border-color: var(--accent);
+        }
+        .blog-card-tag {
+            display: inline-block;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .blog-card h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .blog-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .blog-card .read-more {
+            display: inline-block;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .blog-card .read-more:hover {
+            color: var(--accent);
+        }
+        .blog-card .read-more::after {
+            content: ' →';
+            transition: margin 0.3s;
+        }
+        .blog-card .read-more:hover::after {
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">Daily Vitality</span>
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="nutrition.html">Nutrition</a></li>
+                <li><a href="fitness.html">Fitness</a></li>
+                <li><a href="mindfulness.html">Mindfulness</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="blog.html" class="mobile-link active">Blog</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </nav>
+    </div>
+
+    <section class="blog-hero">
+        <h1>Wellness Insights & Guides</h1>
+        <p>Expert reviews, supplement guides, and science-backed advice to support your health and longevity journey.</p>
+    </section>
+
+    <section class="blog-grid">
+        <div class="blog-cards">
+            <article class="blog-card">
+                <span class="blog-card-tag">Supplement Reviews</span>
+                <h2>Best Blood Sugar Support Supplements 2026</h2>
+                <p>Discover the top-rated blood sugar support supplements, including CelluCare, Gluco6, and GlucoTrust. Expert reviews and buying guide included.</p>
+                <a href="best-blood-sugar-supplements.html" class="read-more">Read Article</a>
+            </article>
+
+            <article class="blog-card">
+                <span class="blog-card-tag">Joint Health</span>
+                <h2>Top Joint Health Products for Pain Relief 2026</h2>
+                <p>Comprehensive reviews of the best joint health supplements including JointVive, Joint Genesis, and Nu Nerve for mobility and comfort.</p>
+                <a href="joint-health-products.html" class="read-more">Read Article</a>
+            </article>
+
+            <article class="blog-card">
+                <span class="blog-card-tag">Weight Management</span>
+                <h2>Weight Loss Supplements That Actually Work 2026</h2>
+                <p>Expert reviews of proven weight loss supplements. Learn about Mitolyn, Java Burn, Liv Pure, and more for effective metabolism support.</p>
+                <a href="weight-loss-supplements.html" class="read-more">Read Article</a>
+            </article>
+
+            <article class="blog-card">
+                <span class="blog-card-tag">Brain Health</span>
+                <h2>How to Improve Memory and Brain Health</h2>
+                <p>Discover the best brain supplements and natural strategies for enhanced memory, focus, and cognitive function. Expert guidance included.</p>
+                <a href="brain-health-supplements.html" class="read-more">Read Article</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="newsletter" style="background: var(--primary);">
+        <div class="container" style="max-width: 600px; text-align: center; padding: 80px 5%;">
+            <h2 style="color: white; margin-bottom: 16px;">Get Weekly Wellness Tips</h2>
+            <p style="color: rgba(255,255,255,0.85); margin-bottom: 32px;">Subscribe for expert health insights and exclusive supplement deals.</p>
+            <form class="newsletter-form" id="newsletter-form" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                <input type="email" class="newsletter-input" id="email-input" placeholder="Enter your email" style="flex: 1; min-width: 250px; padding: 14px 20px; border: none; border-radius: 8px;" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <p style="color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 16px;">We respect your privacy. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About</h4>
+                    <p>Daily Vitality & Longevity Hub provides science-backed resources to help you live a longer, healthier life.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="best-blood-sugar-supplements.html">Blood Sugar Support</a></li>
+                        <li><a href="joint-health-products.html">Joint Health</a></li>
+                        <li><a href="weight-loss-supplements.html">Weight Loss</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61579609894542" target="_blank" rel="noopener noreferrer" aria-label="Facebook">📘</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Daily Vitality & Longevity Hub. Your journey to a longer, healthier life starts here.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
