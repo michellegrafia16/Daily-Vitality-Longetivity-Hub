@@ -1,15 +1,27 @@
-let activeIntervals = [];
+let activeIntervals = { tip: null, testimonial: null };
 let activeEventListeners = [];
 
-function addTrackedInterval(fn, delay) {
+function addTrackedInterval(fn, delay, group) {
     const id = setInterval(fn, delay);
-    activeIntervals.push(id);
+    if (group) {
+        if (activeIntervals[group]) clearInterval(activeIntervals[group]);
+        activeIntervals[group] = id;
+    }
     return id;
 }
 
+function clearIntervalGroup(group) {
+    if (activeIntervals[group]) {
+        clearInterval(activeIntervals[group]);
+        activeIntervals[group] = null;
+    }
+}
+
 function clearAllIntervals() {
-    activeIntervals.forEach(id => clearInterval(id));
-    activeIntervals = [];
+    Object.values(activeIntervals).forEach(id => {
+        if (id) clearInterval(id);
+    });
+    activeIntervals = { tip: null, testimonial: null };
 }
 
 function addTrackedEventListener(element, event, handler) {
@@ -19,16 +31,14 @@ function addTrackedEventListener(element, event, handler) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    try {
-        initMobileMenu();
-        initDailyTips();
-        initTestimonialCarousel();
-        initNewsletterForm();
-        initContactForm();
-        initSmoothScroll();
-    } catch (error) {
-        console.error('Initialization error:', error);
-    }
+    console.log('Page loaded, initializing...');
+    initMobileMenu();
+    initDailyTips();
+    initTestimonialCarousel();
+    initNewsletterForm();
+    initContactForm();
+    initSmoothScroll();
+    console.log('Initialization complete');
 });
 
 window.addEventListener('beforeunload', function() {
@@ -38,20 +48,38 @@ window.addEventListener('beforeunload', function() {
     });
 });
 
+let scrollTimeout;
+window.addEventListener('scroll', function() {
+    if (scrollTimeout) return;
+    scrollTimeout = requestAnimationFrame(function() {
+        const header = document.querySelector('.header');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 24px rgba(27, 77, 62, 0.12)';
+            } else {
+                header.style.boxShadow = '0 2px 16px rgba(27, 77, 62, 0.08)';
+            }
+        }
+        scrollTimeout = null;
+    });
+});
+
 function initMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
+    const toggle = document.querySelector('.hamburger, .menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
+    console.log('Mobile menu elements:', { toggle, mobileMenu, mobileLinksCount: mobileLinks.length });
+
+    if (toggle && mobileMenu) {
+        toggle.addEventListener('click', function() {
+            toggle.classList.toggle('active');
             mobileMenu.classList.toggle('active');
         });
 
         mobileLinks.forEach(function(link) {
             link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
+                toggle.classList.remove('active');
                 mobileMenu.classList.remove('active');
             });
         });
@@ -85,7 +113,6 @@ function initDailyTips() {
     ];
 
     let currentTipIndex = 0;
-    let tipInterval;
 
     function renderDots() {
         if (!tipDotsContainer) return;
@@ -97,7 +124,7 @@ function initDailyTips() {
                 const clickHandler = function() {
                     currentTipIndex = index;
                     updateTip();
-                    resetInterval();
+                    resetTipInterval();
                 };
                 addTrackedEventListener(dot, 'click', clickHandler);
                 tipDotsContainer.appendChild(dot);
@@ -127,29 +154,29 @@ function initDailyTips() {
         updateTip();
     }
 
-    function startInterval() {
-        tipInterval = addTrackedInterval(nextTip, 8000);
+    function startTipInterval() {
+        addTrackedInterval(nextTip, 8000, 'tip');
     }
 
-    function resetInterval() {
-        clearAllIntervals();
-        startInterval();
+    function resetTipInterval() {
+        clearIntervalGroup('tip');
+        startTipInterval();
     }
 
     updateTip();
-    startInterval();
+    startTipInterval();
 
     if (prevBtn) {
         addTrackedEventListener(prevBtn, 'click', function() {
             prevTip();
-            resetInterval();
+            resetTipInterval();
         });
     }
 
     if (nextBtn) {
         addTrackedEventListener(nextBtn, 'click', function() {
             nextTip();
-            resetInterval();
+            resetTipInterval();
         });
     }
 }
@@ -164,7 +191,6 @@ function initTestimonialCarousel() {
     if (testimonials.length === 0) return;
 
     let currentSlide = 0;
-    let carouselInterval;
 
     function createDots() {
         if (!dotsContainer) return;
@@ -175,7 +201,7 @@ function initTestimonialCarousel() {
                 dot.className = 'carousel-dot' + (index === currentSlide ? ' active' : '');
                 const clickHandler = function() {
                     goToSlide(index);
-                    resetInterval();
+                    resetCarouselInterval();
                 };
                 addTrackedEventListener(dot, 'click', clickHandler);
                 dotsContainer.appendChild(dot);
@@ -209,65 +235,70 @@ function initTestimonialCarousel() {
         goToSlide(currentSlide);
     }
 
-    function startInterval() {
-        carouselInterval = addTrackedInterval(nextSlide, 5000);
+    function startCarouselInterval() {
+        addTrackedInterval(nextSlide, 5000, 'testimonial');
     }
 
-    function resetInterval() {
-        clearAllIntervals();
-        startInterval();
+    function resetCarouselInterval() {
+        clearIntervalGroup('testimonial');
+        startCarouselInterval();
     }
 
     createDots();
-    startInterval();
+    startCarouselInterval();
 
     const carousel = document.querySelector('.testimonial-carousel');
     if (carousel) {
         addTrackedEventListener(carousel, 'mouseenter', function() {
-            clearAllIntervals();
+            clearIntervalGroup('testimonial');
         });
         addTrackedEventListener(carousel, 'mouseleave', function() {
-            startInterval();
+            startCarouselInterval();
         });
     }
 }
 
 function initNewsletterForm() {
     const form = document.getElementById('newsletter-form');
-    const successMessage = document.getElementById('newsletter-success');
-    const emailInput = document.getElementById('email-input');
-
-    if (!form || !emailInput) return;
-
-    function isValidEmail(email) {
-        if (!email || email.length > 254) return false;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+    if (!form) {
+        console.log('Newsletter form not found');
+        return;
     }
+    
+    console.log('Newsletter form found, adding listener');
 
-    addTrackedEventListener(form, 'submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
-
-        try {
-            const email = emailInput.value.trim();
-
-            if (email && isValidEmail(email)) {
-                form.style.display = 'none';
-                if (successMessage) {
-                    successMessage.classList.add('show');
-                }
-                console.log('Newsletter subscription successful');
-            } else {
-                emailInput.classList.add('error');
-                setTimeout(() => emailInput.classList.remove('error'), 3000);
-            }
-        } catch (error) {
-            console.error('Newsletter form error:', error);
+        console.log('Newsletter form submitted!');
+        
+        const emailInput = document.getElementById('email-input');
+        if (!emailInput) {
+            console.log('Email input not found');
+            return;
         }
-    });
+        
+        const email = emailInput.value.trim();
+        console.log('Email:', email);
 
-    addTrackedEventListener(emailInput, 'input', function() {
-        emailInput.classList.remove('error');
+        if (email) {
+            try {
+                console.log('Sending POST request...');
+                const response = await fetch('/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+                console.log('Response status:', response.status);
+            } catch (err) {
+                console.error('Error:', err);
+            }
+            
+            form.style.display = 'none';
+            const successMessage = document.getElementById('newsletter-success');
+            if (successMessage) {
+                successMessage.classList.add('show');
+            }
+        }
     });
 }
 
@@ -277,7 +308,7 @@ function initContactForm() {
 
     if (!form) return;
 
-    addTrackedEventListener(form, 'submit', function(e) {
+    addTrackedEventListener(form, 'submit', async function(e) {
         e.preventDefault();
 
         try {
@@ -301,14 +332,34 @@ function initContactForm() {
                     return;
                 }
 
-                form.reset();
-                if (successMessage) {
-                    successMessage.classList.add('show');
-                    setTimeout(function() {
-                        successMessage.classList.remove('show');
-                    }, 5000);
+                const formData = {
+                    name: nameVal,
+                    email: emailVal,
+                    subject: subjectVal,
+                    message: messageVal
+                };
+
+                try {
+                    const response = await fetch(window.location.pathname === '/' ? '/contact' : '/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (response.ok) {
+                        form.reset();
+                        if (successMessage) {
+                            successMessage.classList.add('show');
+                            setTimeout(function() {
+                                successMessage.classList.remove('show');
+                            }, 5000);
+                        }
+                    } else {
+                        console.error('Form submission failed');
+                    }
+                } catch (fetchError) {
+                    console.error('Network error:', fetchError);
                 }
-                console.log('Contact form submitted successfully');
             }
         } catch (error) {
             console.error('Contact form error:', error);
@@ -334,25 +385,6 @@ function initSmoothScroll() {
     });
 }
 
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    if (header) {
-        if (window.scrollY > 50) {
-            header.style.boxShadow = '0 4px 24px rgba(27, 77, 62, 0.12)';
-        } else {
-            header.style.boxShadow = '0 2px 16px rgba(27, 77, 62, 0.08)';
-        }
-    }
-});
-
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
 });
-
-const style = document.createElement('style');
-style.textContent = `
-    body { opacity: 0; transition: opacity 0.3s ease; }
-    body.loaded { opacity: 1; }
-    #tip-text { transition: opacity 0.3s ease; }
-`;
-document.head.appendChild(style);

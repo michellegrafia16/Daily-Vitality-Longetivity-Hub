@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Daily Vitality & Longevity Hub</title>
+    <meta name="description" content="Get in touch with Daily Vitality & Longevity Hub. Send us a message, ask questions, or learn more about our evidence-based wellness resources.">
+    <meta property="og:title" content="Contact - Daily Vitality & Longevity Hub">
+    <meta property="og:description" content="Get in touch with us. Send us a message or learn more about our wellness resources.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +15,10 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <div class="logo">Daily Vitality</div>
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">Daily Vitality</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="nutrition.html">Nutrition</a></li>
@@ -22,13 +28,25 @@
                 <li><a href="health-tracker.html">Health Tracker</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="nutrition.html" class="mobile-link">Nutrition</a>
+            <a href="fitness.html" class="mobile-link">Fitness</a>
+            <a href="mindfulness.html" class="mobile-link">Mindfulness</a>
+            <a href="resources.html" class="mobile-link">Resources</a>
+            <a href="health-tracker.html" class="mobile-link">Health Tracker</a>
+            <a href="contact.html" class="mobile-link active">Contact</a>
+        </nav>
+    </div>
 
     <div class="page-content">
         <div class="page-header">
@@ -74,61 +92,7 @@
             </div>
         </section>
 
-        <section class="content-section" style="background: var(--secondary);">
-            <div class="container">
-                <h2 class="section-title">Other Ways to Reach Us</h2>
-                <div class="content-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-                    <div class="content-card" style="text-align: center;">
-                        <div class="feature-icon" style="font-size: 2.5rem;">📧</div>
-                        <h3>Email</h3>
-                        <p>hello@vitalityhub.com</p>
-                        <p>support@vitalityhub.com</p>
-                    </div>
-                    <div class="content-card" style="text-align: center;">
-                        <div class="feature-icon" style="font-size: 2.5rem;">📞</div>
-                        <h3>Phone</h3>
-                        <p>1-800-VITALITY</p>
-                        <p>Mon-Fri, 9am-5pm EST</p>
-                    </div>
-                    <div class="content-card" style="text-align: center;">
-                        <div class="feature-icon" style="font-size: 2.5rem;">📍</div>
-                        <h3>Location</h3>
-                        <p>123 Wellness Way</p>
-                        <p>Healthy City, HC 12345</p>
-                    </div>
-                    <div class="content-card" style="text-align: center;">
-                        <div class="feature-icon" style="font-size: 2.5rem;">💬</div>
-                        <h3>Social Media</h3>
-                        <p>Follow us for daily tips</p>
-                        <p>@DailyVitalityHub</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="content-section">
-            <div class="container">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <h3>How can I subscribe to your newsletter?</h3>
-                        <p>Simply enter your email in the newsletter signup form on any page and click Subscribe. You'll receive weekly health tips and updates.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>Are your articles medically reviewed?</h3>
-                        <p>Yes, all our health-related content is reviewed by qualified healthcare professionals to ensure accuracy and safety.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>Can I contribute content?</h3>
-                        <p>We occasionally accept guest contributions. Please contact us with your pitch and relevant credentials.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>How do I report incorrect information?</h3>
-                        <p>We strive for accuracy but appreciate your vigilance. Contact us with the specific content and your concerns.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 
     <footer class="footer">
@@ -143,8 +107,8 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="footer-categories">
@@ -158,15 +122,10 @@
                 </div>
                 <div class="footer-contact">
                     <h4>Contact</h4>
-                    <ul class="footer-links">
-                        <li>hello@vitalityhub.com</li>
-                        <li>1-800-VITALITY</li>
-                    </ul>
                     <div class="footer-social">
-                        <a href="#">📘</a>
-                        <a href="#">📸</a>
-                        <a href="#">🐦</a>
-                        <a href="#">📧</a>
+                        <a href="https://www.facebook.com/profile.php?id=61579609894542" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-link" style="background: #1877F2;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -177,22 +136,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = this;
-            const successMessage = document.getElementById('form-success');
-            
-            if (form.checkValidity()) {
-                successMessage.classList.add('show');
-                form.reset();
-                
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 5000);
-            }
-        });
-    </script>
 </body>
 </html>

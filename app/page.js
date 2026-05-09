@@ -4,14 +4,14 @@ import { useState } from 'react'
 
 const products = {
   'blood-sugar': [
-    { name: 'CelluCare', desc: 'Premium blood sugar support with clinically researched ingredients.', rating: '★★★★★ (2,847 reviews)', img: 'https://cellucare.com/assets/img/product-image.png', link: 'https://1c10fz3cutbu2w5ysgnjq9y147.hop.clickbank.net', badge: 'Top Rated' },
-    { name: 'Gluco6', desc: 'Advanced formula with berberine, chromium & cinnamon.', rating: '★★★★★ (1,456 reviews)', img: 'https://gluco6.com/assets/img/product-image.png', link: 'https://2d58843dvymn1o8b-fidbo9ua9.hop.clickbank.net' },
-    { name: 'GlucoBerry', desc: 'Unique berry-based formula for healthy blood sugar.', rating: '★★★★★ (1,203 reviews)', img: 'https://glucoberry.com/assets/img/product-image.png', link: 'https://586015x6xrgk8xa2yqj9obvf2c.hop.clickbank.net' },
-    { name: 'Gluco Extend', desc: 'Extended-release formula for all-day glucose management.', rating: '★★★★☆ (892 reviews)', img: 'https://glucoextend.com/assets/img/product-image.png', link: 'https://477c958zonmnfw75tmjgs5-v15.hop.clickbank.net' },
-    { name: 'GlucoNite', desc: 'Night-time blood sugar support formula.', rating: '★★★★☆ (678 reviews)', img: 'https://gluconite.com/assets/img/product-image.png', link: 'https://0538408a-0dx5q0bved8x87757.hop.clickbank.net' },
-    { name: 'GlucoTonic', desc: 'Energizing blood sugar support with B-vitamins.', rating: '★★★★☆ (534 reviews)', img: 'https://glucotonic.com/assets/img/product-image.png', link: 'https://ca7d7735vqiy2xcdvpel-b0gmh.hop.clickbank.net' },
-    { name: 'GlucoTrust', desc: 'Complete blood sugar defense formula.', rating: '★★★★★ (1,789 reviews)', img: 'https://glucotrust.com/assets/img/product-image.png', link: 'https://a6c39y51tzex1z192gxm13uhee.hop.clickbank.net' },
-    { name: 'Sugar Defender', desc: 'Powerful blood sugar support formula.', rating: '★★★★★ (987 reviews)', img: 'https://sugardefender.com/assets/img/product-image.png', link: 'https://0a6faw69m0bs4t9c52cqscuob6.hop.clickbank.net' },
+    { name: 'CelluCare', desc: 'Premium blood sugar support with clinically researched ingredients.', rating: '★★★★★ (2,847 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUBGLTFxhsA-gAltGvJLDRFylPu8oKlW2TXQH-LSRCJbBeA_RzUjYBs3xkM7IcRqBn3C7jubZ_RnYFWz73CDsOOruAyF-UW0q2Nm10MekrTkEHs2gwdt792JJwCafTXNNHcteGk9NcVnA7uB-mwzBfbGsGaihj1T149wV8Cjj4I9QgiEA0RUMOyRYI0nPF6OuA8tQVStQKPcIAto8pnS6vBfS8z3sIa01GJF=w400', link: 'https://1c10fz3cutbu2w5ysgnjq9y147.hop.clickbank.net', badge: 'Top Rated' },
+    { name: 'Gluco6', desc: 'Advanced formula with berberine, chromium & cinnamon.', rating: '★★★★★ (1,456 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUD_990C08Sxecx1Yg42XlTrddeUqLPSCGBUTw1ucjFIV5jbegD5yf3-kDW4e9_96IIXfSmNW5h-UMIP5lItHoiEZWQ-9MggP351O7wfHxG1xy8JR4Fv02asDZoYrph2qzdk-PxrOP8-N6-AipoGdi4Bbp55GMN6ZwXLSxHSwueFG_0quM6mN1LAhKbislkBGyDZmHmYmgpEBGiIdEv4dYcQjjJUa-qenffB=w400', link: 'https://2d58843dvymn1o8b-fidbo9ua9.hop.clickbank.net' },
+    { name: 'GlucoBerry', desc: 'Unique berry-based formula for healthy blood sugar.', rating: '★★★★★ (1,203 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUDRg1ITvixnyOGOsNXqBm8Bz5LzlnR-i5rpwae0pjUIOmbNYnFWW4_JXulp2TpurdS8kpmni4aPEupxSdUkCvqBTZckrGKuh4DPgNecUSwGepm9T81ExGyT3s_8Kz2IftxaWFIy5TCiJOWN_6ApnafYjfB5bxCw5MgQYrxChpP3EjVdD1m3TSaXhyVIe4yRsyA3YbrS8MHdhM342pttvxdviVzZzgJ0-pkWJKk=w400', link: 'https://586015x6xrgk8xa2yqj9obvf2c.hop.clickbank.net' },
+    { name: 'Gluco Extend', desc: 'Extended-release formula for all-day glucose management.', rating: '★★★★☆ (892 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUAPvoVUMlHVtNtOptAlOUjZuLLSJ_-PJ5O1FpCajo-FRviTGirAyiUqJ_4Arb5R_KcSXoLQ-Yhg4M6FFiNuirPtEWtzTGAaE_zAVNTHL27g0bYgnUwXgrF2bW-8-LZpPSuL-wYWZ2fnheBfUDPnCULSzw9mAJxJXkOPEqWHBroHz8taUK6Y5yMgJpmHo1xO-Le79vISWPNngeiC5ihf7h8UYk5g9paMbEspU1E=w400', link: 'https://477c958zonmnfw75tmjgs5-v15.hop.clickbank.net' },
+    { name: 'GlucoNite', desc: 'Night-time blood sugar support formula.', rating: '★★★★☆ (678 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUAGMWMxa9UcffS_v-FrWn4tHqJxKVUPhXoKwicoCan3PHYsjO554CO55zwa35HwKRd2QU6Pi0DRcsfgt2LF7Oi5Ryfpxmu4TO_isytkuSDKmn6zgNpYZ7asL_O-JjyQH_jdjmzlqCZOFPbLWvjcZp3v1c76alf80emY45B-iMB000haNPfLiMMJLHEvIQvWecgas5ytVwCF-JX3PbEdnTtAcC4WIUqVaLe7=w400', link: 'https://0538408a-0dx5q0bved8x87757.hop.clickbank.net' },
+    { name: 'GlucoTonic', desc: 'Energizing blood sugar support with B-vitamins.', rating: '★★★★☆ (534 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUCJZwFbXJoH9fRja1o3nPCsZUa0iVXRCpbKHR6hU3EC0uzLjXCNMtvtb83ZOqc9DljchFAQOT-jcWqf74hYhPCM-9sTC0UoVbhnqaSEVRmYhw9gX6_srnQ82Rh4c9DUMZhRJbQHcECuaMtPNgmwDloEwTpnSzVPtLXeNjbmhMoD5Mjhgc0vHs_1FzCluJidwwkfOwGNAxsNmLZ271O4yhtRe7M_HCOirHok-MA=w400', link: 'https://ca7d7735vqiy2xcdvpel-b0gmh.hop.clickbank.net' },
+    { name: 'GlucoTrust', desc: 'Complete blood sugar defense formula.', rating: '★★★★★ (1,789 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUBDc4lFFccdXWWWGz5YK6bnwl3h5VzylmcHQwEJ90d6uKpTzRip14TFyZ6KJUGDnbUI2So-LF9fo1rIzah-KxS5I8MwOP22eQg-_pw3ChV8OuhT1r-huVaZiYY1vr6mnKPF26yg4UaKdG9bBpMPWWsX55Ql5-POhVEcCGjQaNvaJ--VL8ziXY-mKuPBk9AISF9FZpkStGzxftk_T6re2gzUhc1xVEO36-lu=w400', link: 'https://a6c39y51tzex1z192gxm13uhee.hop.clickbank.net' },
+    { name: 'Sugar Defender', desc: 'Powerful blood sugar support formula.', rating: '★★★★★ (987 reviews)', img: 'https://lh3.googleusercontent.com/sitesv/AA5AbUDBbjjyKtaamuZIIZecwLdGV_9ar9kWwwaouK2Kfbnjhii0QqDEs-jA7dUFPcxZGrStzjC5w7Y-ZF2Gk-fTyA2X4F-OYNatRrOZKocVyMmj_VqpmQlUUlHaafyKm_LC8Vfg8Y5dwRGV6W9a8vLnkNEj4o3QcP0iJCAkuIsM5MnO_Dk_c0wGegbfYR2srw_UcEwEi18GOA8NxnwYUoVSSjiu5fOmCMpOcY8xV3M=w400', link: 'https://0a6faw69m0bs4t9c52cqscuob6.hop.clickbank.net' },
   ],
   'joint': [
     { name: 'Nu Nerve', desc: 'Advanced nerve support formula with premium ingredients.', rating: '★★★★★ (2,156 reviews)', img: 'https://nunerve.com/assets/images/1-desktop.png', link: 'https://5f4a3xv5-z9p2o198eum415ocs.hop.clickbank.net', badge: 'Top Rated' },
@@ -257,9 +257,9 @@ export default function Home() {
               <h4 className="footer-title">Contact</h4>
               <ul className="footer-links">
                 <li><a href="#">About Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Contact Form</a></li>
+                <li><a href="/privacy.html">Privacy Policy</a></li>
+                <li><a href="/terms.html">Terms of Service</a></li>
+                <li><a href="/contact.html">Contact Form</a></li>
               </ul>
             </div>
           </div>

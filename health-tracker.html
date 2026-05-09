@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Tracker - Daily Vitality</title>
+    <meta name="description" content="Track your daily wellness metrics including water intake, sleep, steps, mood, weight, and blood pressure with our interactive health dashboard.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -1194,8 +1195,9 @@
 
         function getWeekData() {
             const weekData = [];
+            const base = new Date(currentDate);
             for (let i = 6; i >= 0; i--) {
-                const d = new Date();
+                const d = new Date(base);
                 d.setDate(d.getDate() - i);
                 const key = getDateKey(d);
                 weekData.push(healthData[key]?.weight || null);
@@ -1218,10 +1220,13 @@
             calculateScore();
         }
 
+        const WATER_GOAL = 8;
+        const WATER_MAX = 12;
+
         function renderWater(count) {
             const container = document.getElementById('waterGlasses');
             container.innerHTML = '';
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < WATER_MAX; i++) {
                 const glass = document.createElement('div');
                 glass.className = `water-glass ${i < count ? 'filled' : ''}`;
                 glass.onclick = () => adjustWater(i < count ? -1 : 1);
@@ -1229,7 +1234,7 @@
             }
             document.getElementById('waterCount').textContent = `${count} glasses`;
             
-            if (count >= 8) {
+            if (count >= WATER_GOAL) {
                 document.getElementById('waterCard').classList.add('goal-met');
             } else {
                 document.getElementById('waterCard').classList.remove('goal-met');
@@ -1375,7 +1380,7 @@
         }
 
         function updateSteps(value) {
-            const steps = parseInt(value) || 0;
+            const steps = Math.max(0, Math.min(999999, parseInt(value) || 0));
             const data = getTodayData();
             data.steps = steps;
             saveData();
@@ -1397,7 +1402,8 @@
         }
 
         function updateWeight(value) {
-            const weight = parseFloat(value) || null;
+            const raw = parseFloat(value);
+            const weight = (!isNaN(raw) && raw > 0 && raw < 1000) ? Math.round(raw * 10) / 10 : null;
             const data = getTodayData();
             data.weight = weight;
             data.weightUnit = weightUnit;
@@ -1407,24 +1413,33 @@
         }
 
         function toggleWeightUnit() {
+            const data = getTodayData();
+            const currentValue = parseFloat(document.getElementById('weightInput').value) || 0;
+            
+            if (currentValue > 0) {
+                if (weightUnit === 'kg') {
+                    document.getElementById('weightInput').value = Math.round(currentValue * 2.20462 * 10) / 10;
+                } else {
+                    document.getElementById('weightInput').value = Math.round(currentValue / 2.20462 * 10) / 10;
+                }
+            }
+            
             weightUnit = weightUnit === 'kg' ? 'lbs' : 'kg';
             document.getElementById('weightUnit').textContent = weightUnit;
-            const data = getTodayData();
-            if (data.weight) {
-                if (weightUnit === 'lbs') {
-                    data.weight = Math.round(data.weight * 2.20462 * 10) / 10;
-                } else {
-                    data.weight = Math.round(data.weight / 2.20462 * 10) / 10;
-                }
-                document.getElementById('weightInput').value = data.weight;
-            }
             data.weightUnit = weightUnit;
             saveData();
+            renderSparkline();
+        }
+
+        function clampBP(val, min, max) {
+            const n = parseInt(val);
+            if (isNaN(n)) return null;
+            return Math.max(min, Math.min(max, n));
         }
 
         function updateBP() {
-            const sys = parseInt(document.getElementById('bpSystolic').value) || null;
-            const dia = parseInt(document.getElementById('bpDiastolic').value) || null;
+            const sys = clampBP(document.getElementById('bpSystolic').value, 40, 300);
+            const dia = clampBP(document.getElementById('bpDiastolic').value, 20, 200);
             const data = getTodayData();
             data.bpSystolic = sys;
             data.bpDiastolic = dia;
@@ -1434,7 +1449,7 @@
         }
 
         function updatePulse() {
-            const pulse = parseInt(document.getElementById('pulse').value) || null;
+            const pulse = clampBP(document.getElementById('pulse').value, 20, 300);
             const data = getTodayData();
             data.pulse = pulse;
             saveData();
@@ -1507,7 +1522,12 @@
             }
         }
 
+        let confettiTimeout = null;
+
         function showConfetti() {
+            if (confettiTimeout) return;
+            confettiTimeout = setTimeout(() => { confettiTimeout = null; }, 1000);
+
             const container = document.getElementById('confettiContainer');
             const colors = ['#C8956C', '#8FAE7D', '#2D4A3E', '#FFD700', '#FF6B6B'];
             
